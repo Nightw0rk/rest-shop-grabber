@@ -1,0 +1,9 @@
+service:
+    port: 1001
+shops:
+    - apodiscounter:
+        url: http://www.apodiscounter.de/partnerprogramme/krn.csv
+    - eurapon:
+        url: http://preisexporte.apobyte.de/www.eurapon.de/preissuchmaschine/preissuchmaschine.csv
+        header: 1
+        delimeter: '\t'

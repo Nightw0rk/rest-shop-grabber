@@ -1,0 +1,37 @@
+{
+  "name": "rest-shop-grabber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nightw0rk/rest-shop-grabber.git"
+  },
+  "keywords": [
+    "rest",
+    "shop",
+    "grabber",
+    "api"
+  ],
+  "author": "Nightw0rk <nightw0rk@yandex.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nightw0rk/rest-shop-grabber/issues"
+  },
+  "homepage": "https://github.com/Nightw0rk/rest-shop-grabber#readme",
+  "dependencies": {
+    "async": "^2.0.1",
+    "express": "^4.14.0",
+    "request": "^2.75.0",
+    "yamljs": "^0.2.8"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.0",
+    "should": "^11.1.0",
+    "sinon": "^1.17.6",
+    "supertest": "^2.0.0"
+  }
+}
