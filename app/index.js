@@ -1,6 +1,7 @@
 var app = require('express')();
 
-app.use(require('./routes/shops'));
-app.use(require('./routes/triggers'));
+app.use(require('./middleware/store')); // Redis
+app.use(require('./routes/shops')); // Shops api
+app.use(require('./routes/triggers')); // Shop triggers
 
 module.exports = app;

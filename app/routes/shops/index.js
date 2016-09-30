@@ -2,6 +2,7 @@
 
 var route = require('express').Router();
 var product = require('../../model/product');
+var cfgReader = require('yamljs');
 
 /**
  * Getting information about product of shop
@@ -27,7 +28,7 @@ route.get('/', (req, res) => {
             error: 'Please select ' + strError
         });
     }
-    product.getLastPrice(req.query.shopname, req.query.product_id)
+    product.getLastPrice(req.app.redis, req.query.shopname, req.query.product_id)
         .then(price => {
             let response = {};
             response[req.query.product_id] = price;

@@ -1,5 +1,6 @@
 var route = require('express').Router();
 var product = require('../../model/product');
+
 /**
  * Trigger for update data
  * @return {number} id operation
@@ -9,26 +10,28 @@ var product = require('../../model/product');
  * 
  */
 route.post('/update', (req, res) => {
-    product.updatePricies(
-        'test',
-        'http://preisexporte.apobyte.de/www.eurapon.de/preissuchmaschine/preissuchmaschine.csv',
-        1,
-        '\t'
-        )
-        .then(()=>{
-            res.send('OK');
-        });
-});
+    require('async').map(
+        req.app.config.shops,
+        (item, cb) => {
+            var shop = Object.keys(item)[0];
+            console.log("Start parsing " + shop);
+            product.updatePricies(req.app.redis, shop, item[shop].url, item[shop].config)
+                .then(() => {
+                    return cb(null);
+                })
+                .catch(cb);
 
-/**
- * View status of operation
- * @return {json} status operation
- * 
- * @example 
- * GET /update/status/id
- */
-route.get('/update/status/:id', (req, res) => {
-
+        },
+        (err, result) => {
+            if (err) {
+                return res.status(400).send({
+                    status: "ERROR",
+                    err: err
+                })
+            }
+            return res.send({ status: "OK" });
+        }
+    );
 });
 
 module.exports = route;
